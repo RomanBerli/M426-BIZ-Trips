@@ -94,7 +94,7 @@ export default function App() {
             <label htmlFor="month">Filter by Month:</label>{" "}
             <select id="size">
               <option value="">All months</option>
-              <option value="1">Hallo</option>
+              <option value="1">January</option>
               <option value="2">February</option>
               <option value="3">March</option>
             </select>
