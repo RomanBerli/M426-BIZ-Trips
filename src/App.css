@@ -25,11 +25,15 @@ body {
 
 header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding-left: 20px;
+  background-color: #bee1ea;
 }
 
 header img {
   max-height: 100px;
+  margin-right: 20px;
 }
 
 nav {
@@ -39,10 +43,10 @@ nav {
 
 footer {
   text-align: center;
-  color: gray;
+  color: #070a0a;
   padding: 20px 0 20px 0;
   flex-shrink: 0;
-  background-color: gainsboro;
+  background-color: #bee1ea;
 }
 
 header ul {
@@ -50,8 +54,12 @@ header ul {
 }
 
 header li {
-  display: inline;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-right: 20px;
+  
+  
 }
 
 #detail img {
@@ -86,6 +94,7 @@ header li {
   list-style-type: none;
 }
 
+
 #cart td,
 #cart th {
   padding-left: 20px;
@@ -111,7 +120,10 @@ a {
 }
 
 h1 {
-  font-size: 36px;
+  font-size: 30px;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 h3 {
@@ -216,4 +228,7 @@ form > div {
   100% {
     transform: rotate(360deg);
   }
+
+
+
 }
