@@ -2,6 +2,11 @@ import React from "react";
 import "./App.css";
 import Footer from "./Footer";
 import Header from "./Header";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Sommer from "./pages/Sommer";
+import Winter from "./pages/Winter";
+import Fruehling from "./pages/Fruehling";
+import Herbst from "./pages/Herbst";
 
 const trips = [
   {
@@ -58,16 +63,16 @@ const trips = [
   },
 ];
 
-export default function App() {
+function Home() {
   function renderTrip(t) {
     return (
       <div className="product" key={t.id}>
         <figure>
           <div>
-            <img src={"images/items/" + t.id + ".jpg"} alt="name " />
+            <img src={"images/items/" + t.id + ".jpg"} alt={t.title} />
           </div>
           <figcaption>
-            <a href="#. . . ">{t.title}</a>
+            <a href="#">{t.title}</a>
             <div>
               <span>
                 {t.startTrip[2] + "-" + t.startTrip[1] + "-" + t.startTrip[0]}
@@ -86,23 +91,37 @@ export default function App() {
   }
 
   return (
-    <>
-      <div>
-        <Header />
-        <main>
-          <section id="filters">
-            <label htmlFor="month">Filter by Month:</label>{" "}
-            <select id="size">
-              <option value="">All months</option>
-              <option value="1">January</option>
-              <option value="2">February</option>
-              <option value="3">March</option>
-            </select>
-          </section>
-          <section id="products">{trips.map(renderTrip)}</section>
-        </main>
-      </div>
+    <main>
+      <section id="filters">
+        <label htmlFor="month">Filter by Month:</label>
+        <select id="month">
+          <option value="">All months</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          {/* Fügen Sie hier die restlichen Monate hinzu */}
+        </select>
+      </section>
+      <section id="products">{trips.map(renderTrip)}</section>
+    </main>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Header />
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/winter">Winter</Link> | <Link to="/fruehling">Fruehling</Link> | <Link to="/sommer">Sommer</Link> | <Link to="/herbst">Herbst</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/winter" element={<Winter />} />
+        <Route path="/fruehling" element={<Fruehling />} />
+        <Route path="/sommer" element={<Sommer />} />
+        <Route path="/herbst" element={<Herbst />} />
+      </Routes>
       <Footer />
-    </>
+    </Router>
   );
 }
