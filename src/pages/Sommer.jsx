@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./pages.css";
-import Header from "../Header";
 import TripList from "./TripList";
-import Footer from "../Footer";
 
 const trips = [
   {
@@ -66,7 +64,7 @@ const trips = [
   },
 ];
 
-export default function App() {
+export default function Winter() {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
@@ -137,74 +135,62 @@ export default function App() {
   }
 
   return (
-    <Router>
-      <div>
-        <Header />
-        <nav>
-          <Link to="/">Home</Link> | <Link to="/pages/triplist">Trip List</Link>
-        </nav>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <main>
-                <section id="filters">
-                  <div>
-                    <label htmlFor="month">Filter by Month:</label>
-                    <select
-                      id="month"
-                      value={selectedMonth}
-                      onChange={(e) => setSelectedMonth(e.target.value)}
-                    >
-                      <option value="">All months</option>
-                      <option value="1">January</option>
-                      <option value="2">February</option>
-                      <option value="3">March</option>
-                      <option value="4">April</option>
-                      <option value="5">May</option>
-                      <option value="6">June</option>
-                      <option value="7">July</option>
-                      <option value="8">August</option>
-                      <option value="9">September</option>
-                      <option value="10">October</option>
-                      <option value="11">November</option>
-                      <option value="12">December</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="category">Filter by Category:</label>
-                    <select
-                      id="category"
-                      value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                    >
-                      <option value="">All categories</option>
-                      <option value="Ausflug">Ausflug</option>
-                      <option value="Meeting">Meeting</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="price">Filter by Price:</label>
-                    <select
-                      id="price"
-                      value={selectedPrice}
-                      onChange={(e) => setSelectedPrice(e.target.value)}
-                    >
-                      <option value="">All prices</option>
-                      <option value="low">Low (under 150)</option>
-                      <option value="medium">Medium (150-300)</option>
-                      <option value="high">High (above 300)</option>
-                    </select>
-                  </div>
-                </section>
-                <section id="products">{filteredTrips.map(renderTrip)}</section>
-              </main>
-            }
-          />
-          <Route path="/pages/triplist" element={<TripList trips={tripList} />} />
-        </Routes>
-      </div>
-      <Footer />
-    </Router>
+    <div>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/triplist">Trip List</Link>
+      </nav>
+      <main>
+        <section id="filters">
+          <div>
+            <label htmlFor="month">Filter by Month:</label>
+            <select
+              id="month"
+              value={selectedMonth}
+              onChange={(e) => setSelectedMonth(e.target.value)}
+            >
+              <option value="">All months</option>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="category">Filter by Category:</label>
+            <select
+              id="category"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="">All categories</option>
+              <option value="Ausflug">Ausflug</option>
+              <option value="Meeting">Meeting</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="price">Filter by Price:</label>
+            <select
+              id="price"
+              value={selectedPrice}
+              onChange={(e) => setSelectedPrice(e.target.value)}
+            >
+              <option value="">All prices</option>
+              <option value="low">Low (under 150)</option>
+              <option value="medium">Medium (150-300)</option>
+              <option value="high">High (above 300)</option>
+            </select>
+          </div>
+        </section>
+        <section id="products">{filteredTrips.map(renderTrip)}</section>
+      </main>
+    </div>
   );
 }
