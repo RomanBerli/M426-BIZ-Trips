@@ -8,6 +8,9 @@ export default function Header() {
     const season = event.target.value;
     if (season) {
       switch (season) {
+        case "0":
+          navigate("/homepage");
+          break;
         case "1":
           navigate("/winter");
           break;
@@ -34,7 +37,7 @@ export default function Header() {
             <img width="150px" alt="Business Trips" src="/images/logo.png" />
             <label htmlFor="seasons"></label>{" "}
             <select id="seasons" onChange={handleSeasonChange}>
-              <option value="">Jahreszeiten</option>
+              <option value="0">Jahreszeiten</option>
               <option value="1">Winter</option>
               <option value="2">Frühling</option>
               <option value="3">Sommer</option>
