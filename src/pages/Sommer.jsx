@@ -31,7 +31,7 @@ const trips = [
     title: "Buissnes Trip",
     description: "Summer Buissnes Trip to Argentina",
     category: "Ausflug",
-    price: 150,
+    price: 350,
     startTrip: [2021, 12, 13, 9, 0],
     endTrip: [2021, 12, 15, 16, 56],
     meetings: [
