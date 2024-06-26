@@ -4,8 +4,7 @@ export default function Footer() {
   return (
     <footer>
       <p>
-        This site is created for demonstrative purposes only and does not offer
-        any real products or services.
+      Connecting journeys with purpose-where business meets exploration and innovation.
       </p>
       <p>&copy; BBW 2024</p>
     </footer>
