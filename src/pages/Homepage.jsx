@@ -62,12 +62,12 @@ function Home() {
       <div className="product" key={t.id}>
         <figure>
           <div>
-            <img src={"images/image" + t.id + ".png"} alt={t.title} />
+            <img src={"images/images/" + t.id + ".png"} alt={t.title} />
           </div>
           <figcaption>
             <a href="#">{t.title}</a>
             <div>
-              <span>{`${t.startTrip[2]}-${t.startTrip[1]}-${t.startTrip[0]}`}</span>
+              <span>{`${t.startTrip[15]}-${t.startTrip[14]}-${t.startTrip[13]}-${t.startTrip[12]}-${t.startTrip[11]}-${t.startTrip[10]}-${t.startTrip[9]}-${t.startTrip[8]}-${t.startTrip[7]}-${t.startTrip[6]}-${t.startTrip[5]}-${t.startTrip[4]}-${t.startTrip[3]}-${t.startTrip[2]}-${t.startTrip[1]}-${t.startTrip[0]}`}</span>
             </div>
             <p>{t.description}</p>
             <div>

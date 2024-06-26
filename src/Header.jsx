@@ -15,7 +15,7 @@ export default function Header() {
           navigate("/fruehling");
           break;
         case "3":
-          navigate("/pages/summoer.");
+          navigate("/sommer");
           break;
         case "4":
           navigate("/herbst");

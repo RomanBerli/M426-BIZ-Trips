@@ -113,13 +113,13 @@ export default function Fruehling() {
       <div className="product" key={t.id}>
         <figure>
           <div>
-            <img src={"images/image" + t.id + ".png"} alt={t.title} />
+            <img src={"images/fruehling/" + t.id + ".png"} alt={t.title} />
           </div>
           <figcaption>
             <a href="#">{t.title}</a>
             <div>
               <span>
-                {t.startTrip[2] + "-" + t.startTrip[1] + "-" + t.startTrip[0]}
+              {t.startTrip[3] + "-" + t.startTrip[2] + "-" + t.startTrip[1] + "-" + t.startTrip[0]}
               </span>
             </div>
             <p>{t.description}</p>
