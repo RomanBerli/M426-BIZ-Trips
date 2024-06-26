@@ -64,7 +64,7 @@ const trips = [
   },
 ];
 
-export default function Winter() {
+export default function Sommer() {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
