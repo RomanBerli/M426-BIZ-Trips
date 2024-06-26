@@ -113,7 +113,7 @@ export default function Fruehling() {
       <div className="product" key={t.id}>
         <figure>
           <div>
-            <img src={"images/items/" + t.id + ".jpg"} alt={t.title} />
+            <img src={"images/image" + t.id + ".png"} alt={t.title} />
           </div>
           <figcaption>
             <a href="#">{t.title}</a>
