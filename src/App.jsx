@@ -10,7 +10,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 const FormularComponent = () => {
-  const navigate = useNavigate(); // useNavigate hier hinzugefügt
+  const navigate = useNavigate(); 
 
   const handleSubmit = (event) => {
     event.preventDefault();

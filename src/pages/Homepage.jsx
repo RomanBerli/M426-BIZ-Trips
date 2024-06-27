@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./../App.css";
 
 const trips = [
@@ -6,8 +6,8 @@ const trips = [
     id: 1,
     title: "Work",
     description: "Working in the Office",
-    startTrip: [2021, 2, 13, 0, 0],
-    endTrip: [2021, 2, 15, 16, 56],
+    startTrip: [2021, 12, 13, 0, 0],
+    endTrip: [2021, 12, 15, 16, 56],
   },
   {
     id: 2,
@@ -45,8 +45,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 100,
-    startTrip: [2021, 6, 13, 0, 0],
-    endTrip: [2021, 6, 15, 16, 56],
+    startTrip: [2021, 3, 13, 0, 0],
+    endTrip: [2021, 3, 15, 16, 56],
     meetings: [],
   },
   {
@@ -55,8 +55,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 200,
-    startTrip: [2021, 8, 23, 9, 0],
-    endTrip: [2021, 8, 27, 16, 56],
+    startTrip: [2021, 4, 23, 9, 0],
+    endTrip: [2021, 4, 27, 16, 56],
     meetings: [],
   },
   {
@@ -65,8 +65,8 @@ const trips = [
     description: "Summer Buissnes Trip to Argentina",
     category: "Ausflug",
     price: 350,
-    startTrip: [2021, 8, 13, 9, 0],
-    endTrip: [2021, 8, 15, 16, 56],
+    startTrip: [2021, 5, 13, 9, 0],
+    endTrip: [2021, 5, 15, 16, 56],
     meetings: [],
   },
   {
@@ -75,8 +75,8 @@ const trips = [
     description: "Meeting in the Office",
     category: "Meeting",
     price: 150,
-    startTrip: [2021, 7, 13, 9, 0],
-    endTrip: [2021, 7, 15, 16, 56],
+    startTrip: [2021, 3, 13, 9, 0],
+    endTrip: [2021, 3, 15, 16, 56],
     meetings: [],
   },
   {
@@ -85,8 +85,8 @@ const trips = [
     description: "Meeting in the Office",
     category: "Meeting",
     price: 100,
-    startTrip: [2021, 11, 13, 0, 0],
-    endTrip: [2021, 11, 15, 16, 56],
+    startTrip: [2021, 6, 13, 0, 0],
+    endTrip: [2021, 6, 15, 16, 56],
     meetings: [],
   },
   {
@@ -95,8 +95,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 200,
-    startTrip: [2021, 10, 23, 9, 0],
-    endTrip: [2021, 10, 27, 16, 56],
+    startTrip: [2021, 7, 23, 9, 0],
+    endTrip: [2021, 7, 27, 16, 56],
     meetings: [],
   },
   {
@@ -105,8 +105,8 @@ const trips = [
     description: "Autumn Buissnes Trip",
     category: "Ausflug",
     price: 350,
-    startTrip: [2021, 9, 13, 9, 0],
-    endTrip: [2021, 9, 15, 16, 56],
+    startTrip: [2021, 8, 13, 9, 0],
+    endTrip: [2021, 8, 15, 16, 56],
     meetings: [],
   },
   {
@@ -115,8 +115,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 150,
-    startTrip: [2021, 10, 13, 9, 0],
-    endTrip: [2021, 10, 15, 16, 56],
+    startTrip: [2021, 8, 13, 9, 0],
+    endTrip: [2021, 8, 15, 16, 56],
     meetings: [],
   },
   {
@@ -125,8 +125,8 @@ const trips = [
     description: "Meeting in the Office",
     category: "Meeting",
     price: 100,
-    startTrip: [2021, 11, 13, 0, 0],
-    endTrip: [2021, 11, 15, 16, 56],
+    startTrip: [2021, 9, 13, 0, 0],
+    endTrip: [2021, 9, 15, 16, 56],
     meetings: [],
   },
   {
@@ -162,9 +162,15 @@ const trips = [
 ];
 
 function Home() {
-  function formatDate(arr) {
-    return `${arr[2]}-${arr[1]}-${arr[0]}`; // Format: Day-Month-Year
-  }
+  const [selectedMonth, setSelectedMonth] = useState("");
+
+  const handleMonthChange = (event) => {
+    setSelectedMonth(event.target.value);
+  };
+
+  const filteredTrips = selectedMonth
+    ? trips.filter((trip) => trip.startTrip[1] === parseInt(selectedMonth))
+    : trips;
 
   function renderTrip(t) {
     return (
@@ -176,8 +182,7 @@ function Home() {
           <figcaption>
             <a href="#">{t.title}</a>
             <div>
-              <span>Start: {formatDate(t.startTrip)}</span><br />
-              <span>End: {formatDate(t.endTrip)}</span>
+              <span>{`${t.startTrip[2]}-${t.startTrip[1]}-${t.startTrip[0]}`}</span>
             </div>
             <p>{t.description}</p>
             <div>
@@ -195,7 +200,7 @@ function Home() {
     <main>
       <section id="filters">
         <label htmlFor="month">Filter by Month:</label>
-        <select id="month">
+        <select id="month" value={selectedMonth} onChange={handleMonthChange}>
           <option value="">All months</option>
           <option value="1">January</option>
           <option value="2">February</option>
@@ -211,7 +216,7 @@ function Home() {
           <option value="12">December</option>
         </select>
       </section>
-      <section id="products">{trips.map(renderTrip)}</section>
+      <section id="products">{filteredTrips.map(renderTrip)}</section>
     </main>
   );
 }
