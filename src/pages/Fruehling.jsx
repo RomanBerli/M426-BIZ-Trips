@@ -10,8 +10,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 100,
-    startTrip: [2021, 2, 13, 0, 0],
-    endTrip: [2021, 2, 15, 16, 56],
+    startTrip: [2021, 4, 13, 0, 0],
+    endTrip: [2021, 4, 15, 16, 56],
     meetings: [
     ],
   },
@@ -21,8 +21,8 @@ const trips = [
     description: "Spring Buissnes Trip to Spain",
     category: "Buissnes Trip",
     price: 200,
-    startTrip: [2021, 6, 23, 9, 0],
-    endTrip: [2021, 6, 27, 16, 56],
+    startTrip: [2021, 5, 23, 9, 0],
+    endTrip: [2021, 5, 27, 16, 56],
     meetings: [
     ],
   },
@@ -31,9 +31,9 @@ const trips = [
     title: "Buissnes Trip",
     description: "Spring Buissnes Trip to South Korea",
     category: "Ausflug",
-    price: 150,
-    startTrip: [2021, 12, 13, 9, 0],
-    endTrip: [2021, 12, 15, 16, 56],
+    price: 350,
+    startTrip: [2021, 3, 13, 9, 0],
+    endTrip: [2021, 3, 15, 16, 56],
     meetings: [
     ],
   },
@@ -41,10 +41,10 @@ const trips = [
     id: 4,
     title: "Meeting",
     description: "Meeting Outside",
-    category: "Ausflug",
+    category: "Meeting",
     price: 150,
-    startTrip: [2021, 12, 13, 9, 0],
-    endTrip: [2021, 12, 15, 16, 56],
+    startTrip: [2021, 4, 13, 9, 0],
+    endTrip: [2021, 4, 15, 16, 56],
     meetings: [
     ],
   },
@@ -135,9 +135,9 @@ export default function Fruehling() {
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
               <option value="">All months</option>
-              <option value="1">March</option>
-              <option value="2">April</option>
-              <option value="3">May</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
             </select>
           </div>
           <div>

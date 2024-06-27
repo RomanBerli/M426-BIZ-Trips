@@ -53,8 +53,8 @@ const trips = [
     description: "Meeting in the Office",
     category: "Meeting",
     price: 350,
-    startTrip: [2021, 3, 13, 9, 0],
-    endTrip: [2021, 3, 15, 16, 56],
+    startTrip: [2021, 12, 13, 9, 0],
+    endTrip: [2021, 12, 15, 16, 56],
     meetings: [
     ],
   },
@@ -145,7 +145,7 @@ export default function Winter() {
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
               <option value="">All months</option>
-              <option value="1">December</option>
+              <option value="12">December</option>
               <option value="2">January</option>
               <option value="3">February</option>
             </select>

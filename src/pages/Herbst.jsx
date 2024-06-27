@@ -10,8 +10,8 @@ const trips = [
     description: "Meeting in the Office",
     category: "Meeting",
     price: 100,
-    startTrip: [2021, 2, 13, 0, 0],
-    endTrip: [2021, 2, 15, 16, 56],
+    startTrip: [2021, 11, 13, 0, 0],
+    endTrip: [2021, 11, 15, 16, 56],
     meetings: [
     ],
   },
@@ -21,8 +21,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 200,
-    startTrip: [2021, 6, 23, 9, 0],
-    endTrip: [2021, 6, 27, 16, 56],
+    startTrip: [2021, 10, 23, 9, 0],
+    endTrip: [2021, 10, 27, 16, 56],
     meetings: [
       
     ],
@@ -31,10 +31,10 @@ const trips = [
     id: 3,
     title: "Buissnes Trip",
     description: "Autumn Buissnes Trip",
-    category: "Buissnes Trip",
-    price: 150,
-    startTrip: [2021, 12, 13, 9, 0],
-    endTrip: [2021, 12, 15, 16, 56],
+    category: "Ausflug",
+    price: 350,
+    startTrip: [2021, 9, 13, 9, 0],
+    endTrip: [2021, 9, 15, 16, 56],
     meetings: [
     ],
   },
@@ -44,8 +44,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 150,
-    startTrip: [2021, 12, 13, 9, 0],
-    endTrip: [2021, 12, 15, 16, 56],
+    startTrip: [2021, 10, 13, 9, 0],
+    endTrip: [2021, 10, 15, 16, 56],
     meetings: [
     ],
   },
@@ -136,9 +136,9 @@ export default function Herbst() {
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
              <option value="">All months</option>
-              <option value="1">September</option>
-              <option value="2">October</option>
-              <option value="3">November</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
             </select>
           </div>
           <div>

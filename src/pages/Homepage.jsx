@@ -4,59 +4,168 @@ import "./../App.css";
 const trips = [
   {
     id: 1,
-    title: "BT01",
-    description: "San Francisco World Trade Center on new Server/IOT/Client",
+    title: "Work",
+    description: "Working in the Office",
     startTrip: [2021, 2, 13, 0, 0],
     endTrip: [2021, 2, 15, 16, 56],
-    meetings: [
-      {
-        id: 1,
-        title: "One Conference",
-        description: "Key Note on One Conference",
-      },
-      {
-        id: 2,
-        title: "Zero Conference",
-        description: "Workshop Zero on One Conference",
-      },
-    ],
   },
   {
     id: 2,
-    title: "BT02",
-    description: "Santa Clara Halley on new Server/IOT/Client",
-    startTrip: [2021, 6, 23, 9, 0],
-    endTrip: [2021, 6, 27, 16, 56],
-    meetings: [
-      {
-        id: 3,
-        title: "One Conference",
-        description: "HandsOn on One Conference",
-      },
-      {
-        id: 4,
-        title: "One Conference",
-        description: "Key Note on One Conference",
-      },
-    ],
+    title: "Work",
+    description: "Working in the Office",
+    category: "Work",
+    price: 100,
+    startTrip: [2021, 2, 13, 0, 0],
+    endTrip: [2021, 2, 15, 16, 56],
+    meetings: [],
   },
   {
     id: 3,
-    title: "BT03",
-    description: "San Cose City Halley on Docker/IOT/Client",
+    title: "Buissnes Trip",
+    description: "Winter Buissnes Trip to Norway",
+    category: "Ausflug",
+    price: 200,
+    startTrip: [2021, 1, 23, 9, 0],
+    endTrip: [2021, 1, 27, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 4,
+    title: "Meeting",
+    description: "Meeting in the Office",
+    category: "Meeting",
+    price: 350,
     startTrip: [2021, 12, 13, 9, 0],
     endTrip: [2021, 12, 15, 16, 56],
-    meetings: [
-      {
-        id: 5,
-        title: "One Conference",
-        description: "Key Note on One Conference",
-      },
-    ],
+    meetings: [],
+  },
+  {
+    id: 5,
+    title: "Work",
+    description: "Working in the Office",
+    category: "Work",
+    price: 100,
+    startTrip: [2021, 6, 13, 0, 0],
+    endTrip: [2021, 6, 15, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 6,
+    title: "Work",
+    description: "Working in the Office",
+    category: "Work",
+    price: 200,
+    startTrip: [2021, 8, 23, 9, 0],
+    endTrip: [2021, 8, 27, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 7,
+    title: "Buissnes Trip",
+    description: "Summer Buissnes Trip to Argentina",
+    category: "Ausflug",
+    price: 350,
+    startTrip: [2021, 8, 13, 9, 0],
+    endTrip: [2021, 8, 15, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 8,
+    title: "Meeting",
+    description: "Meeting in the Office",
+    category: "Meeting",
+    price: 150,
+    startTrip: [2021, 7, 13, 9, 0],
+    endTrip: [2021, 7, 15, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 9,
+    title: "Meeting",
+    description: "Meeting in the Office",
+    category: "Meeting",
+    price: 100,
+    startTrip: [2021, 11, 13, 0, 0],
+    endTrip: [2021, 11, 15, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 10,
+    title: "Work",
+    description: "Working in the Office",
+    category: "Work",
+    price: 200,
+    startTrip: [2021, 10, 23, 9, 0],
+    endTrip: [2021, 10, 27, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 11,
+    title: "Buissnes Trip",
+    description: "Autumn Buissnes Trip",
+    category: "Ausflug",
+    price: 350,
+    startTrip: [2021, 9, 13, 9, 0],
+    endTrip: [2021, 9, 15, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 12,
+    title: "Work",
+    description: "Working in the Office",
+    category: "Work",
+    price: 150,
+    startTrip: [2021, 10, 13, 9, 0],
+    endTrip: [2021, 10, 15, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 13,
+    title: "Meeting",
+    description: "Meeting in the Office",
+    category: "Meeting",
+    price: 100,
+    startTrip: [2021, 11, 13, 0, 0],
+    endTrip: [2021, 11, 15, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 14,
+    title: "Work",
+    description: "Working in the Office",
+    category: "Work",
+    price: 200,
+    startTrip: [2021, 10, 23, 9, 0],
+    endTrip: [2021, 10, 27, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 15,
+    title: "Buissnes Trip",
+    description: "Autumn Buissnes Trip",
+    category: "Ausflug",
+    price: 350,
+    startTrip: [2021, 9, 13, 9, 0],
+    endTrip: [2021, 9, 15, 16, 56],
+    meetings: [],
+  },
+  {
+    id: 16,
+    title: "Work",
+    description: "Working in the Office",
+    category: "Work",
+    price: 150,
+    startTrip: [2021, 10, 13, 9, 0],
+    endTrip: [2021, 10, 15, 16, 56],
+    meetings: [],
   },
 ];
 
 function Home() {
+  function formatDate(arr) {
+    return `${arr[2]}-${arr[1]}-${arr[0]}`; // Format: Day-Month-Year
+  }
+
   function renderTrip(t) {
     return (
       <div className="product" key={t.id}>
@@ -67,7 +176,8 @@ function Home() {
           <figcaption>
             <a href="#">{t.title}</a>
             <div>
-              <span>{`${t.startTrip[15]}-${t.startTrip[14]}-${t.startTrip[13]}-${t.startTrip[12]}-${t.startTrip[11]}-${t.startTrip[10]}-${t.startTrip[9]}-${t.startTrip[8]}-${t.startTrip[7]}-${t.startTrip[6]}-${t.startTrip[5]}-${t.startTrip[4]}-${t.startTrip[3]}-${t.startTrip[2]}-${t.startTrip[1]}-${t.startTrip[0]}`}</span>
+              <span>Start: {formatDate(t.startTrip)}</span><br />
+              <span>End: {formatDate(t.endTrip)}</span>
             </div>
             <p>{t.description}</p>
             <div>
