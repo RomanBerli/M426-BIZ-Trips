@@ -94,23 +94,32 @@ export default function Sommer() {
     setTripList((prevList) => [...prevList, trip]);
   }
 
-  function renderTrip(t) {
+  function renderTrip(tripData) {
+    const startDate = new Date(tripData.startTrip[0], tripData.startTrip[1], tripData.startTrip[2]);
+    const endDate = new Date(tripData.endTrip[0], tripData.endTrip[1], tripData.endTrip[2]);
+    const tripDurationMs = endDate - startDate;
+
+    const tripDurationDays = tripDurationMs / (1000 * 60 * 60 * 24);
     return (
-      <div className="product" key={t.id}>
+      <div className="product" key={tripData.id}>
         <figure>
           <div>
-            <img src={"images/sommer/" + t.id + ".png"} alt={t.title} />
+            <img src={"images/sommer/" + tripData.id + ".png"} alt={tripData.title} />
           </div>
           <figcaption>
-            <a href="#">{t.title}</a>
+            <a href="#">{tripData.title}</a>
             <div>
               <span>
-              {t.startTrip[3] + "-" + t.startTrip[2] + "-" + t.startTrip[1] + "-" + t.startTrip[0]}
+              Start:{tripData.startTrip[2] + "." + tripData.startTrip[1] + "." + tripData.startTrip[0]}
+              <br />
+              End:{tripData.endTrip[2] + "." + tripData.endTrip[1] + "." + tripData.endTrip[0]}
+              <br />
+              Length of the trip: {tripDurationDays} days
               </span>
             </div>
-            <p>{t.description}</p>
+            <p>{tripData.description}</p>
             <div>
-              <button type="button" onClick={() => addToTripList(t)}>
+              <button type="button" onClick={() => addToTripList(tripData)}>
                 Add to Triplist
               </button>
             </div>
