@@ -10,8 +10,8 @@ const trips = [
     description: "Meeting in the Office",
     category: "Meeting",
     price: 100,
-    startTrip: [2021, 11, 13, 0, 0],
-    endTrip: [2021, 11, 15, 16, 56],
+    startTrip: [2021, 11, 13],
+    endTrip: [2021, 11, 15],
     meetings: [
     ],
   },
@@ -21,8 +21,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 200,
-    startTrip: [2021, 10, 23, 9, 0],
-    endTrip: [2021, 10, 27, 16, 56],
+    startTrip: [2021, 10, 23],
+    endTrip: [2021, 10, 27],
     meetings: [
       
     ],
@@ -33,8 +33,8 @@ const trips = [
     description: "Autumn Buissnes Trip",
     category: "Ausflug",
     price: 350,
-    startTrip: [2021, 9, 13, 9, 0],
-    endTrip: [2021, 9, 15, 16, 56],
+    startTrip: [2021, 9, 13],
+    endTrip: [2021, 9, 15],
     meetings: [
     ],
   },
@@ -44,8 +44,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 150,
-    startTrip: [2021, 10, 13, 9, 0],
-    endTrip: [2021, 10, 15, 16, 56],
+    startTrip: [2021, 10, 13],
+    endTrip: [2021, 10, 15],
     meetings: [
     ],
   },

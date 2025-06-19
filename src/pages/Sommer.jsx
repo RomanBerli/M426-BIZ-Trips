@@ -10,8 +10,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 100,
-    startTrip: [2021, 6, 13, 0, 0],
-    endTrip: [2021, 6, 15, 16, 56],
+    startTrip: [2021, 6, 13],
+    endTrip: [2021, 6, 15],
     meetings: [
     ],
   },
@@ -21,8 +21,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 200,
-    startTrip: [2021, 8, 23, 9, 0],
-    endTrip: [2021, 8, 27, 16, 56],
+    startTrip: [2021, 8, 23],
+    endTrip: [2021, 8, 27],
     meetings: [
     ],
   },
@@ -32,8 +32,8 @@ const trips = [
     description: "Summer Buissnes Trip to Argentina",
     category: "Ausflug",
     price: 350,
-    startTrip: [2021, 8, 13, 9, 0],
-    endTrip: [2021, 8, 15, 16, 56],
+    startTrip: [2021, 8, 13],
+    endTrip: [2021, 8, 15],
     meetings: [
     ],
   },
@@ -43,8 +43,8 @@ const trips = [
     description: "Meeting in the Office",
     category: "Meeting",
     price: 150,
-    startTrip: [2021, 7, 13, 9, 0],
-    endTrip: [2021, 7, 15, 16, 56],
+    startTrip: [2021, 7, 13],
+    endTrip: [2021, 7, 15],
     meetings: [
     ],
   },

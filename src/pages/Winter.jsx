@@ -10,8 +10,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 100,
-    startTrip: [2021, 2, 13, 0, 0],
-    endTrip: [2021, 2, 15, 16, 56],
+    startTrip: [2021, 2, 13],
+    endTrip: [2021, 2, 15],
     meetings: [
       // {
       //   id: 1,
@@ -31,8 +31,8 @@ const trips = [
     description: "Working in the Office",
     category: "Work",
     price: 100,
-    startTrip: [2021, 2, 13, 0, 0],
-    endTrip: [2021, 2, 15, 16, 56],
+    startTrip: [2021, 2, 13],
+    endTrip: [2021, 2, 15],
     meetings: [
   ],
   },
@@ -42,8 +42,8 @@ const trips = [
     description: "Winter Buissnes Trip to Norway",
     category: "Ausflug",
     price: 200,
-    startTrip: [2021, 1, 23, 9, 0],
-    endTrip: [2021, 1, 27, 16, 56],
+    startTrip: [2021, 1, 23],
+    endTrip: [2021, 1, 27],
     meetings: [
     ],
   },
@@ -53,8 +53,8 @@ const trips = [
     description: "Meeting in the Office",
     category: "Meeting",
     price: 350,
-    startTrip: [2021, 12, 13, 9, 0],
-    endTrip: [2021, 12, 15, 16, 56],
+    startTrip: [2021, 12, 13],
+    endTrip: [2021, 12, 15],
     meetings: [
     ],
   },
