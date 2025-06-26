@@ -1,234 +1,128 @@
-import React, { useState } from "react";
-import "./../App.css";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./../styling/hompage.css";
+import Header from "./../Header";
+import Footer from "./../Footer";
+import { getTrips } from "../services/tripService";
 
-const trips = [
-  {
-    id: 1,
-    title: "Work",
-    description: "Working in the Office",
-    startTrip: [2021, 12, 13],
-    endTrip: [2021, 12, 15],
-  },
-  {
-    id: 2,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 100,
-    startTrip: [2021, 2, 13],
-    endTrip: [2021, 2, 15],
-    meetings: [],
-  },
-  {
-    id: 3,
-    title: "Buissnes Trip",
-    description: "Winter Buissnes Trip to Norway",
-    category: "Ausflug",
-    price: 200,
-    startTrip: [2021, 1, 23],
-    endTrip: [2021, 1, 27],
-    meetings: [],
-  },
-  {
-    id: 4,
-    title: "Meeting",
-    description: "Meeting in the Office",
-    category: "Meeting",
-    price: 350,
-    startTrip: [2021, 12, 13],
-    endTrip: [2021, 12, 15],
-    meetings: [],
-  },
-  {
-    id: 5,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 100,
-    startTrip: [2021, 3, 13],
-    endTrip: [2021, 3, 15],
-    meetings: [],
-  },
-  {
-    id: 6,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 200,
-    startTrip: [2021, 4, 23],
-    endTrip: [2021, 4, 27],
-    meetings: [],
-  },
-  {
-    id: 7,
-    title: "Buissnes Trip",
-    description: "Summer Buissnes Trip to Argentina",
-    category: "Ausflug",
-    price: 350,
-    startTrip: [2021, 5, 13],
-    endTrip: [2021, 5, 15],
-    meetings: [],
-  },
-  {
-    id: 8,
-    title: "Meeting",
-    description: "Meeting in the Office",
-    category: "Meeting",
-    price: 150,
-    startTrip: [2021, 3, 13],
-    endTrip: [2021, 3, 15],
-    meetings: [],
-  },
-  {
-    id: 9,
-    title: "Meeting",
-    description: "Meeting in the Office",
-    category: "Meeting",
-    price: 100,
-    startTrip: [2021, 6, 13],
-    endTrip: [2021, 6, 15],
-    meetings: [],
-  },
-  {
-    id: 10,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 200,
-    startTrip: [2021, 7, 23],
-    endTrip: [2021, 7, 27],
-    meetings: [],
-  },
-  {
-    id: 11,
-    title: "Buissnes Trip",
-    description: "Autumn Buissnes Trip",
-    category: "Ausflug",
-    price: 350,
-    startTrip: [2021, 8, 13],
-    endTrip: [2021, 8, 15],
-    meetings: [],
-  },
-  {
-    id: 12,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 150,
-    startTrip: [2021, 8, 13],
-    endTrip: [2021, 8, 15],
-    meetings: [],
-  },
-  {
-    id: 13,
-    title: "Meeting",
-    description: "Meeting in the Office",
-    category: "Meeting",
-    price: 100,
-    startTrip: [2021, 9, 13],
-    endTrip: [2021, 9, 15],
-    meetings: [],
-  },
-  {
-    id: 14,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 200,
-    startTrip: [2021, 10, 23],
-    endTrip: [2021, 10, 27],
-    meetings: [],
-  },
-  {
-    id: 15,
-    title: "Buissnes Trip",
-    description: "Autumn Buissnes Trip",
-    category: "Ausflug",
-    price: 350,
-    startTrip: [2021, 9, 13],
-    endTrip: [2021, 9, 15],
-    meetings: [],
-  },
-  {
-    id: 16,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 150,
-    startTrip: [2021, 10, 13],
-    endTrip: [2021, 10, 15],
-    meetings: [],
-  },
-];
-
-function Home() {
+function Home({ addToTripList }) {
+  const [trips, setTrips] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
+  const [filteredTrips, setFilteredTrips] = useState([]);
+
+  useEffect(() => {
+    fetchTrips();
+  }, []);
+
+  const fetchTrips = async () => {
+    try {
+      const response = await getTrips();
+      setTrips(response.data);
+      setFilteredTrips(response.data);
+    } catch (error) {
+      console.error("Error fetching trips", error);
+    }
+  };
+
+  useEffect(() => {
+    let filtered = trips;
+
+    if (selectedMonth) {
+      filtered = filtered.filter(
+          (trip) => trip.startTrip[1] === parseInt(selectedMonth)
+      );
+    }
+
+    setFilteredTrips(filtered);
+  }, [selectedMonth, trips]);
 
   const handleMonthChange = (event) => {
     setSelectedMonth(event.target.value);
   };
 
-  const filteredTrips = selectedMonth
-    ? trips.filter((trip) => trip.startTrip[1] === parseInt(selectedMonth))
-    : trips;
+  const handleAddToTripList = (trip) => {
+    addToTripList({ ...trip, imagePath: `images/images/${trip.id}.png` });
+    const updatedTrips = trips.map((t) => {
+      if (t.id === trip.id) {
+        return { ...t, successMessage: `Trip "${t.title}" successfully added!` };
+      }
+      return t;
+    });
+    setTrips(updatedTrips);
+    setTimeout(() => {
+      const resetTrips = trips.map((t) => {
+        if (t.id === trip.id) {
+          const { successMessage, ...rest } = t;
+          return rest;
+        }
+        return t;
+      });
+      setTrips(resetTrips);
+    }, 3000);
+  };
 
-  function renderTrip(tripData) {
-    const startDate = new Date(tripData.startTrip[0], tripData.startTrip[1], tripData.startTrip[2]);
-    const endDate = new Date(tripData.endTrip[0], tripData.endTrip[1], tripData.endTrip[2]);
-    const tripDurationMs = endDate - startDate;
-
-    const tripDurationDays = tripDurationMs / (1000 * 60 * 60 * 24);
+  function renderTrip(t) {
+    const imgSrc = `images/images/${t.id}.png`;
     return (
-      <div className="product" key={tripData.id}>
-        <figure>
-          <div>
-            <img src={"images/images/" + tripData.id + ".png"} alt={tripData.title} />
-          </div>
-          <figcaption>
-            <a href="#">{tripData.title}</a>
+        <div className="product" key={t.id}>
+          <figure>
             <div>
-              <span>
-              Start:{tripData.startTrip[2] + "." + tripData.startTrip[1] + "." + tripData.startTrip[0]}
-              <br />
-              End:{tripData.endTrip[2] + "." + tripData.endTrip[1] + "." + tripData.endTrip[0]}
-              <br />
-              Length of the trip: {tripDurationDays} days
-              </span>
+              <img
+                  src={imgSrc}
+                  alt={t.title}
+                  onError={(e) => {
+                    console.error(`Image not found: ${imgSrc}`);
+                    e.target.src = '/images/placeholder.png';
+                  }}
+              />
             </div>
-            <p>{tripData.description}</p>
-            <div>
-              <button type="button" disabled>
-                Add to Triplist
-              </button>
-            </div>
-          </figcaption>
-        </figure>
-      </div>
+            <figcaption>
+              <span className="link-style">{t.title}</span>
+              <div>
+                <span>{`${t.startTrip[2]}-${t.startTrip[1]}-${t.startTrip[0]}`}</span>
+              </div>
+              <p>{t.description}</p>
+              <div>
+                <button type="button" onClick={() => handleAddToTripList(t)}>
+                  Add to Triplist
+                </button>
+                {t.successMessage && <p className="success-message">{t.successMessage}</p>}
+              </div>
+            </figcaption>
+          </figure>
+        </div>
     );
   }
 
   return (
-    <main>
-      <section id="filters">
-        <label htmlFor="month">Filter by Month:</label>
-        <select id="month" value={selectedMonth} onChange={handleMonthChange}>
-          <option value="">All months</option>
-          <option value="1">January</option>
-          <option value="2">February</option>
-          <option value="3">March</option>
-          <option value="4">April</option>
-          <option value="5">May</option>
-          <option value="6">June</option>
-          <option value="7">July</option>
-          <option value="8">August</option>
-          <option value="9">September</option>
-          <option value="10">October</option>
-          <option value="11">November</option>
-          <option value="12">December</option>
-        </select>
-      </section>
-      <section id="products">{filteredTrips.map(renderTrip)}</section>
-    </main>
+      <div>
+        <Header season="home" />
+        <main>
+          <nav>
+            <Link to="/">Formular</Link> | <Link to="/triplist">Trip List</Link>
+          </nav>
+          <section id="filters">
+            <label htmlFor="month">Filter by Month:</label>
+            <select id="month" value={selectedMonth} onChange={handleMonthChange}>
+              <option value="">All months</option>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </section>
+          <section id="products">{filteredTrips.map(renderTrip)}</section>
+        </main>
+        <Footer season="home" />
+      </div>
   );
 }
 

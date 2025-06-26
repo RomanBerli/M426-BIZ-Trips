@@ -1,75 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./pages.css";
-import TripList from "./TripList";
+import "./../styling/pages.css";
+import { FaPlus } from "react-icons/fa";
+import { IMAGE_PATHS } from "./constants";
+import Header from "./../Header";
+import Footer from "./../Footer";
+import { getTrips } from "../services/tripService";
 
-const trips = [
-  {
-    id: 1,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 100,
-    startTrip: [2021, 4, 13],
-    endTrip: [2021, 4, 15],
-    meetings: [
-    ],
-  },
-  {
-    id: 2,
-    title: "Buissnes Trip",
-    description: "Spring Buissnes Trip to Spain",
-    category: "Buissnes Trip",
-    price: 200,
-    startTrip: [2021, 5, 23],
-    endTrip: [2021, 5, 27],
-    meetings: [
-    ],
-  },
-  {
-    id: 3,
-    title: "Buissnes Trip",
-    description: "Spring Buissnes Trip to South Korea",
-    category: "Ausflug",
-    price: 350,
-    startTrip: [2021, 3, 13],
-    endTrip: [2021, 3, 15],
-    meetings: [
-    ],
-  },
-  {
-    id: 4,
-    title: "Meeting",
-    description: "Meeting Outside",
-    category: "Meeting",
-    price: 150,
-    startTrip: [2021, 4, 13],
-    endTrip: [2021, 4, 15],
-    meetings: [
-    ],
-  },
-];
-
-export default function Fruehling() {
+export default function Fruehling({ addToTripList }) {
+  const [trips, setTrips] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
-  const [filteredTrips, setFilteredTrips] = useState(trips);
-  const [tripList, setTripList] = useState([]);
+  const [filteredTrips, setFilteredTrips] = useState([]);
+
+  useEffect(() => {
+    fetchTrips();
+  }, []);
+
+  const fetchTrips = async () => {
+    try {
+      const response = await getTrips();
+      const fruehlingTrips = response.data.filter(trip => [3, 4, 5].includes(trip.startTrip[1]));
+      setTrips(fruehlingTrips);
+      setFilteredTrips(fruehlingTrips);
+    } catch (error) {
+      console.error("Error fetching trips", error);
+    }
+  };
 
   useEffect(() => {
     let filtered = trips;
 
     if (selectedMonth) {
       filtered = filtered.filter(
-        (trip) => trip.startTrip[1] === parseInt(selectedMonth)
+          (trip) => trip.startTrip[1] === parseInt(selectedMonth)
       );
     }
 
     if (selectedCategory) {
-      filtered = filtered.filter(
-        (trip) => trip.category === selectedCategory
-      );
+      filtered = filtered.filter((trip) => trip.category === selectedCategory);
     }
 
     if (selectedPrice) {
@@ -88,96 +58,124 @@ export default function Fruehling() {
     }
 
     setFilteredTrips(filtered);
-  }, [selectedMonth, selectedCategory, selectedPrice]);
+  }, [selectedMonth, selectedCategory, selectedPrice, trips]);
 
-  function addToTripList(trip) {
-    setTripList((prevList) => [...prevList, trip]);
-  }
+  const handleAddToTripList = (trip) => {
+    addToTripList({ ...trip, imagePath: `${IMAGE_PATHS.fruehling}${trip.id}.png` });
+    const updatedTrips = trips.map((t) => {
+      if (t.id === trip.id) {
+        return { ...t, successMessage: `Trip "${t.title}" successfully added!` };
+      }
+      return t;
+    });
+    setTrips(updatedTrips);
+    setTimeout(() => {
+      const resetTrips = trips.map((t) => {
+        if (t.id === trip.id) {
+          const { successMessage, ...rest } = t;
+          return rest;
+        }
+        return t;
+      });
+      setTrips(resetTrips);
+    }, 3000);
+  };
 
-  
-  function renderTrip(tripData) {
-    const startDate = new Date(tripData.startTrip[0], tripData.startTrip[1], tripData.startTrip[2]);
-    const endDate = new Date(tripData.endTrip[0], tripData.endTrip[1], tripData.endTrip[2]);
-    const tripDurationMs = endDate - startDate;
-
-    const tripDurationDays = tripDurationMs / (1000 * 60 * 60 * 24);
+  function renderTrip(t) {
+    const imgSrc = `${IMAGE_PATHS.fruehling}${t.id}.png`;
+    console.log(`Rendering trip: ${t.title} with image src: ${imgSrc}`);
     return (
-      <div className="product" key={tripData.id}>
-        <figure>
-          <div>
-            <img src={"images/fruehling/" + tripData.id + ".png"} alt={tripData.title} />
-          </div>
-          <figcaption>
-            <a href="#">{tripData.title}</a>
+        <div className="product" key={t.id}>
+          <figure>
             <div>
+              <img
+                  src={imgSrc}
+                  alt={t.title}
+                  onError={(e) => {
+                    console.error(`Image not found: ${imgSrc}`);
+                    e.target.src = '/images/placeholder.png';
+                  }}
+              />
+            </div>
+            <figcaption>
+              <span className="link-style">{t.title}</span>
+              <div>
               <span>
-              Start:{tripData.startTrip[2] + "." + tripData.startTrip[1] + "." + tripData.startTrip[0]}
-              <br />
-              End:{tripData.endTrip[2] + "." + tripData.endTrip[1] + "." + tripData.endTrip[0]}
-              <br />
-              Length of the trip: {tripDurationDays} days
+                {t.startTrip[2] +
+                    "-" +
+                    t.startTrip[1] +
+                    "-" +
+                    t.startTrip[0]}
               </span>
-            </div>
-            <p>{tripData.description}</p>
-            <div>
-              <button type="button" onClick={() => addToTripList(tripData)}>
-                Add to Triplist
-              </button>
-            </div>
-          </figcaption>
-        </figure>
-      </div>
+              </div>
+              <p>{t.description}</p>
+              <div>
+                <button
+                    type="button"
+                    onClick={() => handleAddToTripList(t)}
+                >
+                  <FaPlus /> Add to Triplist
+                </button>
+                {t.successMessage && <p className="success-message">{t.successMessage}</p>}
+              </div>
+            </figcaption>
+          </figure>
+        </div>
     );
   }
 
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/triplist">Trip List</Link>
-      </nav>
-      <main>
-        <section id="filters">
-          <div>
-            <label htmlFor="month">Filter by Month:</label>
-            <select
-              id="month"
-              value={selectedMonth}
-              onChange={(e) => setSelectedMonth(e.target.value)}
-            >
-              <option value="">All months</option>
-              <option value="3">March</option>
-              <option value="4">April</option>
-              <option value="5">May</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="category">Filter by Category:</label>
-            <select
-              id="category"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value="">All categories</option>
-              <option value="Ausflug">Ausflug</option>
-              <option value="Meeting">Meeting</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="price">Filter by Price:</label>
-            <select
-              id="price"
-              value={selectedPrice}
-              onChange={(e) => setSelectedPrice(e.target.value)}
-            >
-              <option value="">All prices</option>
-              <option value="low">Low (under 150)</option>
-              <option value="medium">Medium (150-300)</option>
-              <option value="high">High (above 300)</option>
-            </select>
-          </div>
-        </section>
-        <section id="products">{filteredTrips.map(renderTrip)}</section>
-      </main>
-    </div>
+      <div>
+        <Header season="spring" />
+        <nav className="navigation">
+          <Link to="/homepage" className="nav-link">Home</Link>
+          <span>|</span>
+          <Link to="/triplist" className="nav-link">Trip List</Link>
+        </nav>
+        <main>
+          <section id="filters">
+            <div className="filter-group">
+              <label htmlFor="month">Filter by Month:</label>
+              <select
+                  id="month"
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(e.target.value)}
+              >
+                <option value="">All months</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+              </select>
+            </div>
+            <div className="filter-group">
+              <label htmlFor="category">Filter by Category:</label>
+              <select
+                  id="category"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                <option value="">All categories</option>
+                <option value="Ausflug">Ausflug</option>
+                <option value="Meeting">Meeting</option>
+              </select>
+            </div>
+            <div className="filter-group">
+              <label htmlFor="price">Filter by Price:</label>
+              <select
+                  id="price"
+                  value={selectedPrice}
+                  onChange={(e) => setSelectedPrice(e.target.value)}
+              >
+                <option value="">All prices</option>
+                <option value="low">Low (under 150)</option>
+                <option value="medium">Medium (150-300)</option>
+                <option value="high">High (above 300)</option>
+              </select>
+            </div>
+          </section>
+          <section id="products">{filteredTrips.map(renderTrip)}</section>
+        </main>
+        <Footer season="spring" />
+      </div>
   );
 }

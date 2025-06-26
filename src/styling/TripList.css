@@ -1,8 +1,8 @@
 html {
     height: 100%;
-  }
-  
-  body {
+}
+
+body {
     font-family: open sans, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
@@ -10,135 +10,131 @@ html {
     padding: 0;
     color: #364147;
     background-color: #fff;
-  }
-  
-  #root {
+}
+
+#root {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Avoid the IE 10-11 `min-height` bug. */
-  }
-  
-  .content {
+    height: 100vh;
+}
+
+.content {
     flex: 1 0 auto;
     padding: 20px;
-  }
-  
-  header {
+}
+
+header {
     display: flex;
     padding-left: 20px;
-  }
-  
-  header img {
+}
+
+header img {
     max-height: 100px;
-  }
-  
-  nav {
+}
+
+nav {
     display: flex;
     align-items: center;
-  }
-  
-  footer {
+}
+
+footer {
     text-align: center;
     color: rgb(199, 0, 0);
     padding: 20px 0 20px 0;
     flex-shrink: 0;
     background-color: gainsboro;
-  }
-  
-  header ul {
+}
+
+header ul {
     padding-inline-start: 20px;
-  }
-  
-  header li {
+}
+
+header li {
     display: inline;
     margin-right: 20px;
-  }
-  
-  #detail img {
-    max-height: 400;
-  }
-  
-  #price {
+}
+
+#price {
     margin-top: 20px;
     margin-bottom: 10px;
     font-weight: normal;
     font-size: 1.5em;
-  }
-  
-  #products {
+}
+
+#products {
     display: flex;
     justify-content: center;
-  }
-  
-  .product {
+}
+
+.product {
     display: flex;
     align-items: flex-end;
     max-width: 350px;
     text-align: center;
-  }
-  
-  #cart img {
+}
+
+#cart img {
     height: 150px;
-  }
-  
-  #cart ul {
+}
+
+#cart ul {
     padding: 0;
     list-style-type: none;
-  }
-  
-  #cart td,
-  #cart th {
+}
+
+#cart td,
+#cart th {
     padding-left: 20px;
     padding-right: 20px;
-  }
-  
-  input[type="number"] {
+}
+
+input[type="number"] {
     width: 50px;
-  }
-  
-  main {
+}
+
+main {
     padding: 20px;
-  }
-  
-  .cart-item {
+}
+
+.cart-item {
     display: flex;
     margin-bottom: 20px;
-  }
-  
-  a {
+}
+
+a {
     color: #faa541;
     text-decoration: none;
-  }
-  
-  h1 {
+}
+
+h1 {
     font-size: 36px;
-  }
-  
-  h3 {
+}
+
+h3 {
     font-size: 24px;
-  }
-  
-  h1,
-  h2,
-  h3 {
+}
+
+h1,
+h2,
+h3 {
     margin-top: 20px;
     margin-bottom: 10px;
     font-weight: normal;
-  }
-  
-  img {
+}
+
+img {
     max-width: 100%;
     height: auto;
     border: 0;
     vertical-align: middle;
-  }
-  
-  .btn-primary {
+}
+
+.btn-primary {
     color: #fff;
     background-color: #364147;
-  }
-  
-  .btn {
+}
+
+.btn {
     display: inline-block;
     margin-bottom: 0;
     font-weight: 400;
@@ -158,63 +154,56 @@ html {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
-  
-  .btn.disabled,
-  .btn[disabled],
-  fieldset[disabled] .btn {
+}
+
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
     cursor: not-allowed;
     opacity: 0.65;
     filter: alpha(opacity=65);
     -webkit-box-shadow: none;
     box-shadow: none;
-  }
-  
-  p[role="alert"] {
+}
+
+p[role="alert"] {
     display: inline;
     margin-left: 10px;
     color: red;
-  }
-  
-  div[role="alert"] {
+}
+
+div[role="alert"] {
     color: red;
-  }
-  
-  /* input[type="submit"] {
-    margin-top: 20px;
-  } */
-  
-  form > div {
+}
+
+form > div {
     margin-bottom: 20px;
-  }
-  
-  .lds-container {
+}
+
+.lds-container {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .lds-dual-ring {
+}
+.lds-dual-ring {
     display: inline-block;
     width: 80px;
     height: 80px;
-  }
-  .lds-dual-ring:after {
+}
+.lds-dual-ring:after {
     content: " ";
     display: block;
     width: 64px;
     height: 64px;
     margin: 8px;
     border-radius: 50%;
-    border: 6px solid #cef;
-    border-color: #cef transparent #cef transparent;
     animation: lds-dual-ring 1.2s linear infinite;
-  }
-  @keyframes lds-dual-ring {
+}
+@keyframes lds-dual-ring {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  
+}
