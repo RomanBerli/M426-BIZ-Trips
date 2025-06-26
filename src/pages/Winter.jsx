@@ -1,85 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./pages.css";
-import TripList from "./TripList";
+import "./../styling/pages.css";
+import { FaPlus } from "react-icons/fa";
+import { IMAGE_PATHS } from "./constants";
+import Header from "./../Header";
+import Footer from "./../Footer";
+import { getTrips } from "../services/tripService";
 
-const trips = [
-  {
-    id: 1,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 100,
-    startTrip: [2021, 2, 13, 0, 0],
-    endTrip: [2021, 2, 15, 16, 56],
-    meetings: [
-      // {
-      //   id: 1,
-      //   title: "Work ",
-      //   description: "Working in the Office",
-      // },
-      // {
-      //   id: 2,
-      //   title: "Zero Conference",
-      //   description: "Workshop Zero on One Conference",
-      // },
-    ],
-  },
-  {
-    id: 2,
-    title: "Work",
-    description: "Working in the Office",
-    category: "Work",
-    price: 100,
-    startTrip: [2021, 2, 13, 0, 0],
-    endTrip: [2021, 2, 15, 16, 56],
-    meetings: [
-  ],
-  },
-  {
-    id: 3,
-    title: "Buissnes Trip",
-    description: "Winter Buissnes Trip to Norway",
-    category: "Ausflug",
-    price: 200,
-    startTrip: [2021, 1, 23, 9, 0],
-    endTrip: [2021, 1, 27, 16, 56],
-    meetings: [
-    ],
-  },
-  {
-    id: 4,
-    title: "Meeting",
-    description: "Meeting in the Office",
-    category: "Meeting",
-    price: 350,
-    startTrip: [2021, 12, 13, 9, 0],
-    endTrip: [2021, 12, 15, 16, 56],
-    meetings: [
-    ],
-  },
-];
-
-export default function Winter() {
+export default function Winter({ addToTripList }) {
+  const [trips, setTrips] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
-  const [filteredTrips, setFilteredTrips] = useState(trips);
-  const [tripList, setTripList] = useState([]);
+  const [filteredTrips, setFilteredTrips] = useState([]);
+
+  useEffect(() => {
+    fetchTrips();
+  }, []);
+
+  const fetchTrips = async () => {
+    try {
+      const response = await getTrips();
+      const winterTrips = response.data.filter(trip => [12, 1, 2].includes(trip.startTrip[1]));
+      setTrips(winterTrips);
+      setFilteredTrips(winterTrips);
+    } catch (error) {
+      console.error("Error fetching trips", error);
+    }
+  };
 
   useEffect(() => {
     let filtered = trips;
 
     if (selectedMonth) {
       filtered = filtered.filter(
-        (trip) => trip.startTrip[1] === parseInt(selectedMonth)
+          (trip) => trip.startTrip[1] === parseInt(selectedMonth)
       );
     }
 
     if (selectedCategory) {
-      filtered = filtered.filter(
-        (trip) => trip.category === selectedCategory
-      );
+      filtered = filtered.filter((trip) => trip.category === selectedCategory);
     }
 
     if (selectedPrice) {
@@ -98,86 +58,124 @@ export default function Winter() {
     }
 
     setFilteredTrips(filtered);
-  }, [selectedMonth, selectedCategory, selectedPrice]);
+  }, [selectedMonth, selectedCategory, selectedPrice, trips]);
 
-  function addToTripList(trip) {
-    setTripList((prevList) => [...prevList, trip]);
-  }
+  const handleAddToTripList = (trip) => {
+    addToTripList({ ...trip, imagePath: `${IMAGE_PATHS.winter}${trip.id}.png` });
+    const updatedTrips = trips.map((t) => {
+      if (t.id === trip.id) {
+        return { ...t, successMessage: `Trip "${t.title}" successfully added!` };
+      }
+      return t;
+    });
+    setTrips(updatedTrips);
+    setTimeout(() => {
+      const resetTrips = trips.map((t) => {
+        if (t.id === trip.id) {
+          const { successMessage, ...rest } = t;
+          return rest;
+        }
+        return t;
+      });
+      setTrips(resetTrips);
+    }, 3000);
+  };
 
   function renderTrip(t) {
+    const imgSrc = `${IMAGE_PATHS.winter}${t.id}.png`;
+    console.log(`Rendering trip: ${t.title} with image src: ${imgSrc}`);
     return (
-      <div className="product" key={t.id}>
-        <figure>
-          <div>
-            <img src={"images/winter/" + t.id + ".png"} alt={t.title} />
-          </div>
-          <figcaption>
-            <a href="#">{t.title}</a>
+        <div className="product" key={t.id}>
+          <figure>
             <div>
+              <img
+                  src={imgSrc}
+                  alt={t.title}
+                  onError={(e) => {
+                    console.error(`Image not found: ${imgSrc}`);
+                    e.target.src = '/images/placeholder.png';
+                  }}
+              />
+            </div>
+            <figcaption>
+              <span className="link-style">{t.title}</span>
+              <div>
               <span>
-                {t.startTrip[3] + "-" + t.startTrip[2] + "-" + t.startTrip[1] + "-" + t.startTrip[0]}
+                {t.startTrip[2] +
+                    "-" +
+                    t.startTrip[1] +
+                    "-" +
+                    t.startTrip[0]}
               </span>
-            </div>
-            <p>{t.description}</p>
-            <div>
-              <button type="button" onClick={() => addToTripList(t)}>
-                Add to Triplist
-              </button>
-            </div>
-          </figcaption>
-        </figure>
-      </div>
+              </div>
+              <p>{t.description}</p>
+              <div>
+                <button
+                    type="button"
+                    onClick={() => handleAddToTripList(t)}
+                >
+                  <FaPlus /> Add to Triplist
+                </button>
+                {t.successMessage && <p className="success-message">{t.successMessage}</p>}
+              </div>
+            </figcaption>
+          </figure>
+        </div>
     );
   }
 
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/triplist">Trip List</Link>
-      </nav>
-      <main>
-        <section id="filters">
-          <div>
-            <label htmlFor="month">Filter by Month:</label>
-            <select
-              id="month"
-              value={selectedMonth}
-              onChange={(e) => setSelectedMonth(e.target.value)}
-            >
-              <option value="">All months</option>
-              <option value="12">December</option>
-              <option value="2">January</option>
-              <option value="3">February</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="category">Filter by Category:</label>
-            <select
-              id="category"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value="">All categories</option>
-              <option value="Ausflug">Ausflug</option>
-              <option value="Meeting">Meeting</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="price">Filter by Price:</label>
-            <select
-              id="price"
-              value={selectedPrice}
-              onChange={(e) => setSelectedPrice(e.target.value)}
-            >
-              <option value="">All prices</option>
-              <option value="low">Low (under 150)</option>
-              <option value="medium">Medium (150-300)</option>
-              <option value="high">High (above 300)</option>
-            </select>
-          </div>
-        </section>
-        <section id="products">{filteredTrips.map(renderTrip)}</section>
-      </main>
-    </div>
+      <div>
+        <Header season="winter" />
+        <nav className="navigation">
+          <Link to="/homepage" className="nav-link">Home</Link>
+          <span>|</span>
+          <Link to="/triplist" className="nav-link">Trip List</Link>
+        </nav>
+        <main>
+          <section id="filters">
+            <div className="filter-group">
+              <label htmlFor="month">Filter by Month:</label>
+              <select
+                  id="month"
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(e.target.value)}
+              >
+                <option value="">All months</option>
+                <option value="12">December</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+              </select>
+            </div>
+            <div className="filter-group">
+              <label htmlFor="category">Filter by Category:</label>
+              <select
+                  id="category"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                <option value="">All categories</option>
+                <option value="Ausflug">Ausflug</option>
+                <option value="Meeting">Meeting</option>
+              </select>
+            </div>
+            <div className="filter-group">
+              <label htmlFor="price">Filter by Price:</label>
+              <select
+                  id="price"
+                  value={selectedPrice}
+                  onChange={(e) => setSelectedPrice(e.target.value)}
+              >
+                <option value="">All prices</option>
+                <option value="low">Low (under 150)</option>
+                <option value="medium">Medium (150-300)</option>
+                <option value="high">High (above 300)</option>
+              </select>
+            </div>
+          </section>
+          <section id="products">{filteredTrips.map(renderTrip)}</section>
+        </main>
+        <Footer season="winter" />
+      </div>
   );
 }

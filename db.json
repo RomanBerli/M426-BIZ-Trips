@@ -1,56 +1,313 @@
 {
   "trips": [
     {
-      "id": 1,
-      "title": "BT01",
-      "description": "San Francisco World Trade Center on new Server/IOT/Client ",
-      "startTrip": [2021, 2, 13, 0, 0],
-      "endTrip": [2021, 2, 15, 16, 56],
-      "meetings": [
-        {
-          "id": 1,
-          "title": "One Conference",
-          "description": "Key Note on One Conference"
-        },
-        {
-          "id": 2,
-          "title": "Zero Conference",
-          "description": "Workshop Zero on One Conference"
-        }
-      ]
+      "id": "1",
+      "title": "Work",
+      "description": "Working in the Office",
+      "category": "Work",
+      "price": 100,
+      "startTrip": [
+        2021,
+        6,
+        13,
+        0,
+        0
+      ],
+      "endTrip": [
+        2021,
+        6,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
     },
     {
-      "id": 2,
-      "title": "BT02",
-      "description": "Santa Clara Halley on new Server/IOT/Client",
-      "startTrip": [2021, 6, 23, 9, 0],
-      "endTrip": [2021, 6, 27, 16, 56],
-      "meetings": [
-        {
-          "id": 3,
-          "title": "One Conference",
-          "description": "HandsOn on One Conference"
-        },
-        {
-          "id": 4,
-          "title": "One Conference",
-          "description": "Key Note on One Conference"
-        }
-      ]
+      "id": "2",
+      "title": "Work",
+      "description": "Working in the Office",
+      "category": "Work",
+      "price": 200,
+      "startTrip": [
+        2021,
+        8,
+        23,
+        9,
+        0
+      ],
+      "endTrip": [
+        2021,
+        8,
+        27,
+        16,
+        56
+      ],
+      "meetings": [],
+      "imagePath": "images/images/2.png"
     },
     {
-      "id": 3,
-      "title": "BT03",
-      "description": "San Cose City Halley on Docker/IOT/Client",
-      "startTrip": [2021, 12, 13, 9, 0],
-      "endTrip": [2021, 12, 15, 16, 56],
-      "meetings": [
-        {
-          "id": 5,
-          "title": "One Conference",
-          "description": "Key Note on One Conference"
-        }
-      ]
+      "id": "3",
+      "title": "Business Trip",
+      "description": "Summer Business Trip to Argentina",
+      "category": "Ausflug",
+      "price": 350,
+      "startTrip": [
+        2021,
+        8,
+        13,
+        9,
+        0
+      ],
+      "endTrip": [
+        2021,
+        8,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "4",
+      "title": "Meeting",
+      "description": "Meeting in the Office",
+      "category": "Meeting",
+      "price": 150,
+      "startTrip": [
+        2021,
+        7,
+        13,
+        9,
+        0
+      ],
+      "endTrip": [
+        2021,
+        7,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "5",
+      "title": "Work",
+      "description": "Working in the Office",
+      "category": "Work",
+      "price": 100,
+      "startTrip": [
+        2021,
+        2,
+        13,
+        0,
+        0
+      ],
+      "endTrip": [
+        2021,
+        2,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "6",
+      "title": "Business Trip",
+      "description": "Winter Business Trip to Norway",
+      "category": "Ausflug",
+      "price": 200,
+      "startTrip": [
+        2021,
+        1,
+        23,
+        9,
+        0
+      ],
+      "endTrip": [
+        2021,
+        1,
+        27,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "7",
+      "title": "Meeting",
+      "description": "Meeting in the Office",
+      "category": "Meeting",
+      "price": 350,
+      "startTrip": [
+        2021,
+        12,
+        13,
+        9,
+        0
+      ],
+      "endTrip": [
+        2021,
+        12,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "8",
+      "title": "Meeting",
+      "description": "Meeting in the Office",
+      "category": "Meeting",
+      "price": 100,
+      "startTrip": [
+        2021,
+        11,
+        13,
+        0,
+        0
+      ],
+      "endTrip": [
+        2021,
+        11,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "10",
+      "title": "Business Trip",
+      "description": "Autumn Business Trip",
+      "category": "Ausflug",
+      "price": 350,
+      "startTrip": [
+        2021,
+        9,
+        13,
+        9,
+        0
+      ],
+      "endTrip": [
+        2021,
+        9,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "11",
+      "title": "Work",
+      "description": "Working in the Office",
+      "category": "Work",
+      "price": 150,
+      "startTrip": [
+        2021,
+        10,
+        13,
+        9,
+        0
+      ],
+      "endTrip": [
+        2021,
+        10,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "13",
+      "title": "Business Trip",
+      "description": "Spring Business Trip to South Korea",
+      "category": "Ausflug",
+      "price": 350,
+      "startTrip": [
+        2021,
+        3,
+        13,
+        9,
+        0
+      ],
+      "endTrip": [
+        2021,
+        3,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "14",
+      "title": "Meeting",
+      "description": "Meeting Outside",
+      "category": "Meeting",
+      "price": 150,
+      "startTrip": [
+        2021,
+        4,
+        13,
+        9,
+        0
+      ],
+      "endTrip": [
+        2021,
+        4,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "15",
+      "title": "Work",
+      "description": "Working in the Office",
+      "category": "Work",
+      "price": 100,
+      "startTrip": [
+        2021,
+        4,
+        13,
+        0,
+        0
+      ],
+      "endTrip": [
+        2021,
+        4,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
+    },
+    {
+      "id": "16",
+      "title": "Work",
+      "description": "Working in the Office",
+      "category": "Work",
+      "price": 100,
+      "startTrip": [
+        2021,
+        12,
+        13,
+        0,
+        0
+      ],
+      "endTrip": [
+        2021,
+        12,
+        15,
+        16,
+        56
+      ],
+      "meetings": []
     }
   ]
 }
