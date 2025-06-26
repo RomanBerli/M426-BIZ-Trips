@@ -44,11 +44,6 @@ const FormularComponent = () => {
               <br />
               <br />
 
-              <input name="zeit" type="time" placeholder="Zeit" required />
-              <br />
-              <br />
-              <br />
-
               <button type="submit">Submit</button>
             </form>
           </div>
