@@ -3,8 +3,18 @@ import "./../styling/TripList.css";
 import { IMAGE_PATHS } from "./constants";
 import Header from "./../Header";
 import Footer from "./../Footer";
+import { FaTrash } from "react-icons/fa";
+import { deleteTrip } from "./../services/tripService";
 
-const TripList = ({ tripList = []}) => {
+
+const TripList = ({ tripList = [], deleteFromTripList }) => {
+      const handleDelete = async (tripId) => {
+        try {
+          deleteFromTripList(tripId);
+        } catch (error) {
+          console.error("Error deleting trip", error);
+        }
+      };
 
     return (
         <div className="trip-list-container">
@@ -27,14 +37,19 @@ const TripList = ({ tripList = []}) => {
                                     alt={trip.title}
                                     className="trip-image"
                                 />
-                                    <>
-                                        <div className="trip-info">
-                                            <h2>{trip.title}</h2>
-                                            <p>{trip.description}</p>
-                                        </div>
-                                    </>
-
+                                <>
+                                    <div className="trip-info">
+                                        <h2>{trip.title}</h2>
+                                        <p>{trip.description}</p>
+                                    </div>
+                                </>
+                                <div className="button-group">
+                                    <button className="btn-delete" onClick={() => handleDelete(trip.id)}>
+                                       <FaTrash /> Delete
+                                    </button>
+                                </div>
                             </div>
+
                         ))}
                     </div>
                 )}

@@ -60,6 +60,10 @@ const App = () => {
     setTripList((prevList) => [...prevList, trip]);
   };
 
+  const deleteFromTripList = (tripId) => {
+    setTripList((prevList) => prevList.filter(trip => trip.id !== tripId));
+  };
+
   return (
       <>
 
@@ -71,7 +75,7 @@ const App = () => {
           <Route path="/fruehling" element={<Fruehling addToTripList={addToTripList} />} />
           <Route path="/sommer" element={<Sommer addToTripList={addToTripList} />} />
           <Route path="/herbst" element={<Herbst addToTripList={addToTripList} />} />
-          <Route path="/triplist" element={<TripList tripList={tripList} />} />
+          <Route path="/triplist" element={<TripList tripList={tripList} deleteFromTripList={deleteFromTripList}/>} />
         </Routes>
 
       </>
