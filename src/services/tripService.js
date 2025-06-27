@@ -6,4 +6,6 @@ export const getTrips = () => {
     return axios.get(API_URL);
 };
 
-
+export const deleteTrip = (id) => {
+  return axios.delete(`${API_URL}/${id}`);
+};
