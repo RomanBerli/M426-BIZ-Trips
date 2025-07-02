@@ -9,7 +9,6 @@ import Herbst from "./pages/Herbst";
 import Footer from "./Footer";
 import TripList from "./pages/TripList";
 
-
 const FormularComponent = () => {
   const navigate = useNavigate();
 
@@ -20,36 +19,46 @@ const FormularComponent = () => {
   };
 
   return (
-      <div className="App">
-        <header className="header">
-          <h3>Füllen Sie bitte folgendes Formular aus:</h3>
-        </header>
-        <div className="ganz">
-          <div className="formular">
-            <form onSubmit={handleSubmit}>
-              <input name="vorname" type="text" placeholder="Vorname" required />
-              <br />
-              <br />
+    <div className="App">
+      <header className="header">
+        <h3>Füllen Sie bitte folgendes Formular aus:</h3>
+      </header>
+      <div className="ganz">
+        <div className="formular">
+          <form onSubmit={handleSubmit}>
+            <input name="vorname" type="text" placeholder="Vorname" required />
+            <br />
+            <br />
 
-              <input name="nachname" type="text" placeholder="Nachname" required />
-              <br />
-              <br />
+            <input
+              name="nachname"
+              type="text"
+              placeholder="Nachname"
+              required
+            />
+            <br />
+            <br />
 
-              <input name="email" type="email" placeholder="Email" required />
-              <br />
-              <br />
+            <input name="email" type="email" placeholder="Email" required />
+            <br />
+            <br />
 
-              <input name="telefonnummer" type="tel" placeholder="Telefonnummer" required />
-              <br />
-              <br />
-              <br />
+            <input
+              name="telefonnummer"
+              type="tel"
+              placeholder="Telefonnummer"
+              required
+            />
+            <br />
+            <br />
+            <br />
 
-              <button type="submit">Submit</button>
-            </form>
-          </div>
+            <button type="submit">Submit</button>
+          </form>
         </div>
-        <Footer/>
       </div>
+      <Footer />
+    </div>
   );
 };
 
@@ -61,24 +70,44 @@ const App = () => {
   };
 
   const deleteFromTripList = (tripId) => {
-    setTripList((prevList) => prevList.filter(trip => trip.id !== tripId));
+    setTripList((prevList) => prevList.filter((trip) => trip.id !== tripId));
   };
 
   return (
-      <>
-
-
-        <Routes>
-          <Route path="/" element={<FormularComponent />} />
-          <Route path="/homepage" element={<Home addToTripList={addToTripList} />} />
-          <Route path="/winter" element={<Winter addToTripList={addToTripList} />} />
-          <Route path="/fruehling" element={<Fruehling addToTripList={addToTripList} />} />
-          <Route path="/sommer" element={<Sommer addToTripList={addToTripList} />} />
-          <Route path="/herbst" element={<Herbst addToTripList={addToTripList} />} />
-          <Route path="/triplist" element={<TripList tripList={tripList} deleteFromTripList={deleteFromTripList}/>} />
-        </Routes>
-
-      </>
+    <>
+      <Routes>
+        <Route path="/" element={<FormularComponent />} />
+        <Route
+          path="/homepage"
+          element={<Home addToTripList={addToTripList} />}
+        />
+        <Route
+          path="/winter"
+          element={<Winter addToTripList={addToTripList} />}
+        />
+        <Route
+          path="/fruehling"
+          element={<Fruehling addToTripList={addToTripList} />}
+        />
+        <Route
+          path="/sommer"
+          element={<Sommer addToTripList={addToTripList} />}
+        />
+        <Route
+          path="/herbst"
+          element={<Herbst addToTripList={addToTripList} />}
+        />
+        <Route
+          path="/triplist"
+          element={
+            <TripList
+              tripList={tripList}
+              deleteFromTripList={deleteFromTripList}
+            />
+          }
+        />
+      </Routes>
+    </>
   );
 };
 

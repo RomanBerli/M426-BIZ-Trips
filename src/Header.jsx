@@ -6,26 +6,24 @@ export default function Header() {
 
   const handleSeasonChange = (event) => {
     const season = event.target.value;
-    if (season) {
-      switch (season) {
-        case "0":
-          navigate("/homepage");
-          break;
-        case "1":
-          navigate("/winter");
-          break;
-        case "2":
-          navigate("/fruehling");
-          break;
-        case "3":
-          navigate("/sommer");
-          break;
-        case "4":
-          navigate("/herbst");
-          break;
-        default:
-          break;
-      }
+    switch (season) {
+      case "all":
+        navigate("/homepage");
+        break;
+      case "1":
+        navigate("/winter");
+        break;
+      case "2":
+        navigate("/fruehling");
+        break;
+      case "3":
+        navigate("/sommer");
+        break;
+      case "4":
+        navigate("/herbst");
+        break;
+      default:
+        break;
     }
   };
 
@@ -34,10 +32,13 @@ export default function Header() {
       <nav>
         <ul>
           <li>
-            <img width="150px" alt="Business Trips" src="/images/logo.png" />
+            <img alt="Business Trips" src="/images/logo.png" />
             <label htmlFor="seasons"></label>{" "}
-            <select id="seasons" onChange={handleSeasonChange}>
-              <option value="0">Jahreszeiten</option>
+            <select id="seasons" onChange={handleSeasonChange} defaultValue="">
+              <option value="" disabled>
+                Jahreszeiten
+              </option>
+              <option value="all">Alle</option>
               <option value="1">Winter</option>
               <option value="2">Frühling</option>
               <option value="3">Sommer</option>
