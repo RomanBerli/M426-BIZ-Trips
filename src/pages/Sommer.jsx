@@ -7,7 +7,7 @@ import Header from "./../Header";
 import Footer from "./../Footer";
 import { getTrips } from "../services/tripService";
 import { useNavigate } from "react-router-dom";
- 
+
 export default function Sommer({ addToTripList }) {
   const [trips, setTrips] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
@@ -18,35 +18,37 @@ export default function Sommer({ addToTripList }) {
   const handleBack = () => {
     navigate(-1);
   };
- 
+
   useEffect(() => {
     fetchTrips();
   }, []);
- 
+
   const fetchTrips = async () => {
     try {
       const response = await getTrips();
-      const summerTrips = response.data.filter(trip => [6, 7, 8].includes(trip.startTrip[1]));
+      const summerTrips = response.data.filter((trip) =>
+        [6, 7, 8].includes(trip.startTrip[1]),
+      );
       setTrips(summerTrips);
       setFilteredTrips(summerTrips);
     } catch (error) {
       console.error("Error fetching trips", error);
     }
   };
- 
+
   useEffect(() => {
     let filtered = trips;
- 
+
     if (selectedMonth) {
       filtered = filtered.filter(
-          (trip) => trip.startTrip[1] === parseInt(selectedMonth)
+        (trip) => trip.startTrip[1] === parseInt(selectedMonth),
       );
     }
- 
+
     if (selectedCategory) {
       filtered = filtered.filter((trip) => trip.category === selectedCategory);
     }
- 
+
     if (selectedPrice) {
       filtered = filtered.filter((trip) => {
         switch (selectedPrice) {
@@ -61,15 +63,21 @@ export default function Sommer({ addToTripList }) {
         }
       });
     }
- 
+
     setFilteredTrips(filtered);
   }, [selectedMonth, selectedCategory, selectedPrice, trips]);
- 
+
   const handleAddToTripList = (trip) => {
-    addToTripList({ ...trip, imagePath: `${IMAGE_PATHS.sommer}${trip.id}.png` });
+    addToTripList({
+      ...trip,
+      imagePath: `${IMAGE_PATHS.sommer}${trip.id}.png`,
+    });
     const updatedTrips = trips.map((t) => {
       if (t.id === trip.id) {
-        return { ...t, successMessage: `Trip "${t.title}" successfully added!` };
+        return {
+          ...t,
+          successMessage: `Trip "${t.title}" successfully added!`,
+        };
       }
       return t;
     });
@@ -85,105 +93,104 @@ export default function Sommer({ addToTripList }) {
       setTrips(resetTrips);
     }, 3000);
   };
- 
+
   function renderTrip(t) {
     const imgSrc = `${IMAGE_PATHS.sommer}${t.id}.png`;
     console.log(`Rendering trip: ${t.title} with image src: ${imgSrc}`);
     return (
-<div className="product" key={t.id}>
-<figure>
-<div>
-<img
-                  src={imgSrc}
-                  alt={t.title}
-                  onError={(e) => {
-                    console.error(`Image not found: ${imgSrc}`);
-                    e.target.src = '/images/placeholder.png';
-                  }}
-              />
-</div>
-<figcaption>
-<span className="link-style">{t.title}</span>
-<div>
-<span>
-                {t.startTrip[2] +
-                    "-" +
-                    t.startTrip[1] +
-                    "-" +
-                    t.startTrip[0]}
-</span>
-</div>
-<p>{t.description}</p>
-<div>
-<button
-                    type="button"
-                    onClick={() => handleAddToTripList(t)}
->
-<FaPlus /> Add to Triplist
-</button>
-                {t.successMessage && <p className="success-message">{t.successMessage}</p>}
-</div>
-</figcaption>
-</figure>
-</div>
+      <div className="product" key={t.id}>
+        <figure>
+          <div>
+            <img
+              src={imgSrc}
+              alt={t.title}
+              onError={(e) => {
+                console.error(`Image not found: ${imgSrc}`);
+                e.target.src = "/images/placeholder.png";
+              }}
+            />
+          </div>
+          <figcaption>
+            <span className="link-style">{t.title}</span>
+            <div>
+              <span>
+                {t.startTrip[2] + "-" + t.startTrip[1] + "-" + t.startTrip[0]}
+              </span>
+            </div>
+            <p>{t.description}</p>
+            <div>
+              <button type="button" onClick={() => handleAddToTripList(t)}>
+                <FaPlus /> Add to Triplist
+              </button>
+              {t.successMessage && (
+                <p className="success-message">{t.successMessage}</p>
+              )}
+            </div>
+          </figcaption>
+        </figure>
+      </div>
     );
   }
- 
+
   return (
-<div>
-<Header season="summer" />
-<nav className="navigation">
-<Link to="/homepage" className="nav-link">Home</Link>
-<span>|</span>
-<Link to="/triplist" className="nav-link">Trip List</Link>
-</nav>
-<main>
-<button className="back-button" onClick={handleBack}>
-            Zurück
-</button>
-<section id="filters">
-<div className="filter-group">
-<label htmlFor="month">Filter by Month:</label>
-<select
-                  id="month"
-                  value={selectedMonth}
-                  onChange={(e) => setSelectedMonth(e.target.value)}
->
-<option value="">All months</option>
-<option value="6">June</option>
-<option value="7">July</option>
-<option value="8">August</option>
-</select>
-</div>
-<div className="filter-group">
-<label htmlFor="category">Filter by Category:</label>
-<select
-                  id="category"
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
->
-<option value="">All categories</option>
-<option value="Ausflug">Ausflug</option>
-<option value="Meeting">Meeting</option>
-</select>
-</div>
-<div className="filter-group">
-<label htmlFor="price">Filter by Price:</label>
-<select
-                  id="price"
-                  value={selectedPrice}
-                  onChange={(e) => setSelectedPrice(e.target.value)}
->
-<option value="">All prices</option>
-<option value="low">Low (under 150)</option>
-<option value="medium">Medium (150-300)</option>
-<option value="high">High (above 300)</option>
-</select>
-</div>
-</section>
-<section id="products">{filteredTrips.map(renderTrip)}</section>
-</main>
-<Footer season="summer" />
-</div>
+    <div>
+      <Header season="summer" />
+      <nav className="navigation">
+        <Link to="/homepage" className="nav-link">
+          Home
+        </Link>
+        <span>|</span>
+        <Link to="/triplist" className="nav-link">
+          Trip List
+        </Link>
+      </nav>
+      <main>
+        <button className="back-button" onClick={handleBack}>
+          Zurück
+        </button>
+        <section id="filters">
+          <div className="filter-group">
+            <label htmlFor="month">Filter by Month:</label>
+            <select
+              id="month"
+              value={selectedMonth}
+              onChange={(e) => setSelectedMonth(e.target.value)}
+            >
+              <option value="">All months</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+            </select>
+          </div>
+          <div className="filter-group">
+            <label htmlFor="category">Filter by Category:</label>
+            <select
+              id="category"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="">All categories</option>
+              <option value="Ausflug">Ausflug</option>
+              <option value="Meeting">Meeting</option>
+            </select>
+          </div>
+          <div className="filter-group">
+            <label htmlFor="price">Filter by Price:</label>
+            <select
+              id="price"
+              value={selectedPrice}
+              onChange={(e) => setSelectedPrice(e.target.value)}
+            >
+              <option value="">All prices</option>
+              <option value="low">Low (under 150)</option>
+              <option value="medium">Medium (150-300)</option>
+              <option value="high">High (above 300)</option>
+            </select>
+          </div>
+        </section>
+        <section id="products">{filteredTrips.map(renderTrip)}</section>
+      </main>
+      <Footer season="summer" />
+    </div>
   );
 }
