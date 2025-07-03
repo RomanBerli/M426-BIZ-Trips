@@ -7,7 +7,7 @@ import {FaEdit, FaSave, FaTrash} from "react-icons/fa";
 import React, {useState} from "react";
 
 const TripList = ({tripList = [], deleteFromTripList}) => {
-    const [isEditMode, setIsEditMode] = useState(false);
+    const [editTripId, setEditTripId] = useState(null);
 
     const handleDelete = async (tripId) => {
         try {
@@ -16,6 +16,19 @@ const TripList = ({tripList = [], deleteFromTripList}) => {
             console.error("Error deleting trip", error);
         }
     };
+
+    const handleEdit = async (e, trip) => {
+        e.preventDefault();
+        const form = e.target;
+        try {
+           const updatedTitle = form.title.value;
+           const updatedDescription = form.description.value;
+           setEditTripId(null);
+        } catch (err) {
+            console.error("Error while editing trip", err);
+            setEditTripId(null);
+        }
+    }
 
     return (
         <div className="trip-list-container">
@@ -46,7 +59,7 @@ const TripList = ({tripList = [], deleteFromTripList}) => {
                                 />
                                 <>
                                     <div className="trip-info">
-                                        {!isEditMode ? (
+                                        {editTripId !== trip.id ? (
                                             <>
                                                 <h2>{trip.title}</h2>
                                                 <p>{trip.description}</p>
@@ -54,14 +67,14 @@ const TripList = ({tripList = [], deleteFromTripList}) => {
                                         ) : (
                                             <>
                                                 <div className="formular">
-                                                    <form>
+                                                    <form onSubmit={(e) => handleEdit(e, trip)}>
                                                         <input name="title" type="text" placeholder="Titel"
-                                                               value={trip.title}/>
+                                                               defaultValue={trip.title}/>
                                                         <input name="description" type="text" placeholder="Beschreibung"
-                                                               value={trip.description}/>
+                                                               defaultValue={trip.description}/>
                                                         <button
                                                             className="btn-save"
-                                                            onClick={() => setIsEditMode(false)}
+                                                            type="submit"
                                                         >
                                                             <FaSave/> Save
                                                         </button>
@@ -72,11 +85,11 @@ const TripList = ({tripList = [], deleteFromTripList}) => {
                                     </div>
                                 </>
                                 <div className="button-group">
-                                    {!isEditMode ? (
+                                    {editTripId !== trip.id ? (
                                         <>
                                             <button
                                                 className="btn-edit"
-                                                onClick={() => setIsEditMode(true)}
+                                                onClick={() => setEditTripId(trip.id)}
                                             >
                                                 <FaEdit/> Edit
                                             </button>
