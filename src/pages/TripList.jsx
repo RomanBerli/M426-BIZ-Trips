@@ -25,6 +25,11 @@ const TripList = ({tripList = [], deleteFromTripList, updateTripList}) => {
         const updatedTitle = form.title.value;
         const updatedDescription = form.description.value;
 
+        if (updatedTitle === trip.title && updatedDescription === trip.description) {
+            setEditTripId(null);
+            return;
+        }
+
         try {
             const updatedTrip = await updateTrip(trip.id, {
                 title: updatedTitle,
