@@ -5,6 +5,7 @@ import Header from "./../Header";
 import Footer from "./../Footer";
 import {FaEdit, FaSave, FaTrash} from "react-icons/fa";
 import React, {useState} from "react";
+import {updateTrip} from "../services/tripService";
 
 const TripList = ({tripList = [], deleteFromTripList}) => {
     const [editTripId, setEditTripId] = useState(null);
@@ -20,9 +21,15 @@ const TripList = ({tripList = [], deleteFromTripList}) => {
     const handleEdit = async (e, trip) => {
         e.preventDefault();
         const form = e.target;
+
+        const updatedTitle = form.title.value;
+        const updatedDescription = form.description.value;
+
         try {
-           const updatedTitle = form.title.value;
-           const updatedDescription = form.description.value;
+            await updateTrip(trip.id, {
+                title: updatedTitle,
+                description: updatedDescription,
+            });
            setEditTripId(null);
         } catch (err) {
             console.error("Error while editing trip", err);
