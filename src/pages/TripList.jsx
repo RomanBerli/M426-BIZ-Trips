@@ -7,7 +7,7 @@ import {FaEdit, FaSave, FaTrash} from "react-icons/fa";
 import React, {useState} from "react";
 import {updateTrip} from "../services/tripService";
 
-const TripList = ({tripList = [], deleteFromTripList}) => {
+const TripList = ({tripList = [], deleteFromTripList, updateTripList}) => {
     const [editTripId, setEditTripId] = useState(null);
 
     const handleDelete = async (tripId) => {
@@ -26,11 +26,12 @@ const TripList = ({tripList = [], deleteFromTripList}) => {
         const updatedDescription = form.description.value;
 
         try {
-            await updateTrip(trip.id, {
+            const updatedTrip = await updateTrip(trip.id, {
                 title: updatedTitle,
                 description: updatedDescription,
             });
-           setEditTripId(null);
+            updateTripList(updatedTrip)
+            setEditTripId(null);
         } catch (err) {
             console.error("Error while editing trip", err);
             setEditTripId(null);
@@ -108,7 +109,7 @@ const TripList = ({tripList = [], deleteFromTripList}) => {
                                             </button>
                                         </>
                                     ) : (
-                                    <></>
+                                        <></>
                                     )
                                     }
                                 </div>
