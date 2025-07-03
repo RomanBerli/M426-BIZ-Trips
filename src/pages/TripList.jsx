@@ -3,7 +3,7 @@ import "./../styling/TripList.css";
 import {IMAGE_PATHS} from "./constants";
 import Header from "./../Header";
 import Footer from "./../Footer";
-import {FaEdit, FaSave, FaTrash} from "react-icons/fa";
+import {FaEdit, FaSave, FaTimes, FaTrash} from "react-icons/fa";
 import React, {useState} from "react";
 import {updateTrip} from "../services/tripService";
 
@@ -85,12 +85,21 @@ const TripList = ({tripList = [], deleteFromTripList, updateTripList}) => {
                                                                defaultValue={trip.title}/>
                                                         <input name="description" type="text" placeholder="Beschreibung"
                                                                defaultValue={trip.description}/>
-                                                        <button
-                                                            className="btn-save"
-                                                            type="submit"
-                                                        >
-                                                            <FaSave/> Save
-                                                        </button>
+                                                        <div className="button-group">
+                                                            <button
+                                                                className="btn-save"
+                                                                type="submit"
+                                                            >
+                                                                <FaSave/> Save
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                className="btn-cancel"
+                                                                onClick={() => setEditTripId(null)}
+                                                            >
+                                                                <FaTimes/> Discard
+                                                            </button>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </>
