@@ -73,6 +73,14 @@ const App = () => {
     setTripList((prevList) => prevList.filter((trip) => trip.id !== tripId));
   };
 
+  const updateTripList = (updateTrip) => {
+    setTripList((prevList) =>
+      prevList.map((trip) =>
+        trip.id === updateTrip.id ? updateTrip : trip
+      )
+    );
+  };
+
   return (
     <>
       <Routes>
@@ -103,6 +111,7 @@ const App = () => {
             <TripList
               tripList={tripList}
               deleteFromTripList={deleteFromTripList}
+              updateTripList={updateTripList}
             />
           }
         />

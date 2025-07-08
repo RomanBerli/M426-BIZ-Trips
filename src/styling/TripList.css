@@ -98,8 +98,6 @@ h1 {
     display: flex;
     align-items: center;
     gap: 5px;
-    background-color: #364147;
-    color: #fff;
     transition: background-color 0.3s;
 }
 
